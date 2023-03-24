@@ -58,7 +58,7 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          $script = "$(Get-Location)\.github\workflows\installwinpcap.ps1"
+          $script = "$(Get-Location)\script\installwinpcap.ps1"
           Write-Host $script
           . $script
 

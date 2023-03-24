@@ -18,11 +18,13 @@ choco install -y --limitoutput autohotkey.portable
 $winPcapExe = "c:\Windows\Temp\WinPcap_4_1_3.exe"
 (New-Object System.Net.WebClient).DownloadFile('https://www.winpcap.org/install/bin/WinPcap_4_1_3.exe', $winPcapExe)
 
-$installScript = "$($env:GITHUB_WORKSPACE)\installwinpcap.ahk"
+$installScript = "$($env:GITHUB_WORKSPACE)\script\installwinpcap.ahk"
 Get-Content $installScript
 AutoHotkey /ErrorStdOut $installScript $winPcapExe 2>&1 | more
 
-Get-Content "$($env:GITHUB_WORKSPACE)\installwinpcap_debug.txt"
+Get-ChildItem -recurse -force
+
+Get-Content "$($env:GITHUB_WORKSPACE)\script\installwinpcap_debug.txt"
 
 if (!(Test-Path -Path C:\Windows\System32\wpcap.dll)) {
     throw "failed installing wpcap.dll for runtime tests"
